@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser()); // 🍪 added
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: '*',
   credentials: true, // 🍪 allow cookies cross-origin
 }));
 
