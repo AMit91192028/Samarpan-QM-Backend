@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser()); // 🍪 added
 app.use(cors({
-  origin: '*',
+  origin: 'https://samarpan-qm-fronted.vercel.app',
   credentials: true, // 🍪 allow cookies cross-origin
 }));
 
