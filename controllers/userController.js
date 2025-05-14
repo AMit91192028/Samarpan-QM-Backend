@@ -168,12 +168,13 @@ const verifyOtp = async (req, res) => {
     const token = jwt.sign({ userId: user._id,email:user.email }, process.env.JWT_SECRET,{ expiresIn: "1h" } );
 
     // Set authentication token in cookie
-    res.cookie("token", token, {
-      httpOnly: false,
-     secure:false, // set to true if using HTTPS
-      sameSite: "Lax",
-      maxAge: 60 * 60 * 1000, // 1 hour
-    });
+   res.cookie("token", token, {
+  httpOnly: true,    // ✅ Prevent client-side JS access
+  secure: true,      // ✅ Cookies sent only over HTTPS
+  sameSite: "None",  // ✅ Required for cross-site cookies with HTTPS
+  maxAge: 60 * 60 * 1000, // 1 hour
+});
+
 
     // // Redirect based on the role sent from the frontend
     // if (role === 'admin') {

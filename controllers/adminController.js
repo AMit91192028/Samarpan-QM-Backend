@@ -261,8 +261,8 @@ const verifyOTP = async (req, res) => {
 
     // Set new token cookie
     res.cookie("token", token, {
-      httpOnly: false,
-      secure: false, // keep as-is for development
+      httpOnly: true,
+      secure: true, // keep as-is for development
       sameSite: "Lax",
       maxAge: 60 * 60 * 1000, // 1 hour
       path: "/",         // ensure it's accessible from all routes
