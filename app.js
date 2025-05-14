@@ -49,10 +49,12 @@ app.use('/api/bookings', bookingRoutes);
 cron.schedule('* * * * *', updateStaus)
 // MongoDB & Server
 const PORT = process.env.PORT || 4001;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/queue-management';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://ay9336148501:5nmSXyOAhHTtKsYm@updatequeue.kboyjfm.mongodb.net/?retryWrites=true&w=majority&appName=UPDATEQueue';
 
 mongoose.connect(MONGO_URI, {
-
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 10000, // Optional: 10 seconds timeout
 })
 .then(() => {
   console.log('✅ MongoDB connected');
@@ -63,6 +65,7 @@ mongoose.connect(MONGO_URI, {
 .catch((err) => {
   console.error('❌ MongoDB connection error:', err.message);
 });
+
 
 // Error handling middleware (place after routes)
 app.use((err, req, res, next) => {
