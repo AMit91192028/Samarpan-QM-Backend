@@ -253,17 +253,17 @@ const verifyOTP = async (req, res) => {
 
     // Clear existing token cookie before setting a new one
     res.clearCookie("token", {
-      httpOnly: false,
-      secure: false, // keep false during development; change to true for production
+      httpOnly: true,
+      secure: true, // keep false during development; change to true for production
       sameSite: "Lax",
       path: "/"
     });
 
     // Set new token cookie
     res.cookie("token", token, {
-      httpOnly: false,
-      secure: false, // keep as-is for development
-      sameSite: "Lax",
+      httpOnly: true,
+      secure: true, // keep as-is for development
+      sameSite: "None",
       maxAge: 60 * 60 * 1000, // 1 hour
       path: "/",         // ensure it's accessible from all routes
       overwrite: true,   // ensures old token gets replaced

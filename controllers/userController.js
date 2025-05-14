@@ -169,8 +169,8 @@ const verifyOtp = async (req, res) => {
 
     // Set authentication token in cookie
  res.cookie("token", token, {
-  httpOnly: false,
-  secure: false,
+  httpOnly: true,
+  secure: true,
   sameSite: "None",
   maxAge: 60 * 60 * 1000,
 });
@@ -197,7 +197,7 @@ const verifyOtp = async (req, res) => {
 const logoutUser = (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: false, // true if using HTTPS
+    secure: true, // true if using HTTPS
     sameSite: "Lax",
   });
   res.status(200).json({ message: "Logged out successfully." });
