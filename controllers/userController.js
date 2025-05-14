@@ -168,11 +168,11 @@ const verifyOtp = async (req, res) => {
     const token = jwt.sign({ userId: user._id,email:user.email }, process.env.JWT_SECRET,{ expiresIn: "1h" } );
 
     // Set authentication token in cookie
-   res.cookie("token", token, {
-  httpOnly: true,    // ✅ Prevent client-side JS access
-  secure: true,      // ✅ Cookies sent only over HTTPS
-  sameSite: "None",  // ✅ Required for cross-site cookies with HTTPS
-  maxAge: 60 * 60 * 1000, // 1 hour
+ res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "None",
+  maxAge: 60 * 60 * 1000,
 });
 
 
