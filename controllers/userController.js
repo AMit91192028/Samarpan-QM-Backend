@@ -142,7 +142,7 @@ const resendOtp = async (req, res) => {
 // Verify OTP
 const verifyOtp = async (req, res) => {
   const { email, otp } = req.body;
-
+ console.log(email,otp)
   try {
     // Find user by email
     const user = await User.findOne({ email });
@@ -169,7 +169,7 @@ const verifyOtp = async (req, res) => {
 
     // Set authentication token in cookie
  res.cookie("token", token, {
-  httpOnly: true,
+  httpOnly: false,
   secure: true,
   sameSite: "None",
   maxAge: 60 * 60 * 1000,
