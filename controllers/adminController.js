@@ -246,7 +246,7 @@ const verifyOTP = async (req, res) => {
 
     // Generate JWT token
     const token = jwt.sign(
-      { adminId: admin._id, isAdmin: true,hospitalId:admin.hospitalId },
+      { adminId: admin._id, isAdmin: true,hospitalId:admin.hospitalId,Name:admin.name },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );

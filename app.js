@@ -14,10 +14,23 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser()); // 🍪 added
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://samarpan-qm-fronted.vercel.app', // ✅ Replace with actual Vercel domain
+  'https://*.vercel.app'
+];
+
 app.use(cors({
-  origin: 'https://samarpan-qm-fronted.vercel.app',
-  credentials: true, // 🍪 allow cookies cross-origin
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
 }));
+
 
 // Routes
 const hospitalRoutes = require('./routes/hospitalRoutes');
@@ -44,7 +57,7 @@ mongoose.connect(MONGO_URI, {
 .then(() => {
   console.log('✅ MongoDB connected');
   app.listen(PORT, () => {
-    console.log(`🚀 Server is running at http://localhost:${PORT}`);
+    console.log(`🚀 Server is running at ${PORT}`);
   });
 })
 .catch((err) => {
